@@ -19,7 +19,7 @@ jobs:
     name: Evaluate policies
     runs-on: ubuntu-latest
 
-    permissions:
+    # permissions:
       # contents: read # for actions/checkout to fetch code
       # packages: write
       # pull-requests: write # needed to create and update comments in PRs
