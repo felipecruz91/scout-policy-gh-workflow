@@ -37,5 +37,6 @@ jobs:
           command: policy
           image: "dockerscoutpolicytest/customers-api-service:0.0.12"
           organization: "dockerscoutpolicytest"
+          timeout: "1m10s"
           exit-code: true # Fail the build if the policies are not met
 
