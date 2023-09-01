@@ -37,6 +37,27 @@ jobs:
           command: policy
           image: "dockerscoutpolicytest/customers-api-service:0.0.12"
           organization: "dockerscoutpolicytest"
-          timeout: "1m10s"
-          exit-code: true # Fail the build if the policies are not met
 
+      - name: Evaluate already indexed image with timeout
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
+          organization: "dockerscoutpolicytest"
+          timeout: "1m10s"
+
+      - name: Evaluate already indexed image with platform
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
+          organization: "dockerscoutpolicytest"
+          platform: "linux/amd64"
+
+      - name: Evaluate already indexed image with exit code true
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
+          organization: "dockerscoutpolicytest"
+          exit-code: true # Fail the build if the policies are not met
