@@ -11,18 +11,11 @@ on:
 env:
   REGISTRY: docker.io
   REGISTRY_USER: felipecruz1638514
-  # IMAGE_NAME: felipecruz/${{ github.event.repository.name }}
-  # SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
 jobs:
   build-analyze-push:
     name: Evaluate policies
     runs-on: ubuntu-latest
-
-    # permissions:
-      # contents: read # for actions/checkout to fetch code
-      # packages: write
-      # pull-requests: write # needed to create and update comments in PRs
 
     steps:
       - name: Set up QEMU
@@ -37,31 +30,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      #
-      # - name: Docker meta
-      #   id: docker_meta
-      #   uses: docker/metadata-action@v4
-      #   with:
-      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      #     labels: |
-      #       org.opencontainers.image.revision=${{ env.SHA }}
-      #     tags: |
-      #       type=edge
-      #       type=semver,pattern={{version}}
-      #       type=sha,prefix=,suffix=,format=short
-      #
-      # - name: Build and export to Docker
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     push: false
-      #     load: true # Export to Docker Engine rather than pushing to a registry
-      #     tags: ${{ steps.docker_meta.outputs.tags }}
-      #     cache-from: type=gha
-      #     cache-to: type=gha,mode=max
-      #     platforms: linux/amd64
-      #
+
       - name: Evaluate already indexed image
-        uses: docker/scout-action@v0.23.4
+        uses: felipecruz91/scout-action@main
         with:
           command: policy
           image: "dockerscoutpolicytest/customers-api-service:0.0.12"
