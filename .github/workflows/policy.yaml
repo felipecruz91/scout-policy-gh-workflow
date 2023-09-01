@@ -8,11 +8,11 @@ on:
   pull_request:
     branches: ["**"]
 
-# env:
-#   REGISTRY: docker.io
-#   REGISTRY_USER: felipecruz
-#   IMAGE_NAME: felipecruz/${{ github.event.repository.name }}
-#   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
+env:
+  REGISTRY: docker.io
+  REGISTRY_USER: felipecruz1638514
+  # IMAGE_NAME: felipecruz/${{ github.event.repository.name }}
+  # SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
 jobs:
   build-analyze-push:
