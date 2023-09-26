@@ -37,6 +37,7 @@ jobs:
           command: policy
           image: "dockerscoutpolicytest/customers-api-service:0.0.12"
           organization: "dockerscoutpolicytest"
+          debug: true
 
       - name: Evaluate already indexed image with platform
         uses: felipecruz91/scout-action@main
