@@ -35,10 +35,18 @@ jobs:
         uses: felipecruz91/scout-action@main
         with:
           command: policy
-          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
-          organization: "dockerscoutpolicytest"
+          image: "dockerscoutpolicy/customers-api-service:0.0.8"
+          organization: "dockerscoutpolicy"
           debug: true
 
+      - name: Evaluate already indexed image (registry)
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "registry://dockerscoutpolicy/customers-api-service:0.0.8"
+          organization: "dockerscoutpolicy"
+          debug: true
+          
       - name: Evaluate already indexed image with platform
         uses: felipecruz91/scout-action@main
         with:
