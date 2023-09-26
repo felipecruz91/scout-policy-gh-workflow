@@ -30,8 +30,20 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-                    
-      - name: Evaluate already indexed image
+          
+      - name: Docker Pull
+        run: |
+          docker pull storm:latest
+
+      - name: Evaluate local image
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "storm:latest"
+          organization: "dockerscoutpolicy"
+          debug: true    
+          
+      - name: Fetch policy results from image (exists in registry)
         uses: felipecruz91/scout-action@main
         with:
           command: policy
@@ -39,26 +51,39 @@ jobs:
           organization: "dockerscoutpolicy"
           debug: true
 
-      - name: Evaluate already indexed image (registry)
+      - name: Fetch policy results from image w/ platform (exists in registry)
         uses: felipecruz91/scout-action@main
         with:
           command: policy
-          image: "registry://dockerscoutpolicy/customers-api-service:0.0.8"
+          image: "dockerscoutpolicy/customers-api-service:0.0.8"
           organization: "dockerscoutpolicy"
+          platform: "linux/amd64"
           debug: true
           
-      - name: Evaluate already indexed image with platform
+      - name: Fetch policy results from image in env 'latest-indexed' (does NOT exist in registry)
         uses: felipecruz91/scout-action@main
         with:
           command: policy
-          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
-          organization: "dockerscoutpolicytest"
-          platform: "linux/amd64"
-
-      - name: Evaluate already indexed image with exit code true
+          image: "dockerscoutpolicy/customers-api-service"
+          organization: "dockerscoutpolicy"
+          environment: "latest-indexed"
+          debug: true
+          
+      - name: Fetch policy results from image with jfrog domain in env 'staging' (does NOT exist in registry)
         uses: felipecruz91/scout-action@main
         with:
           command: policy
-          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
-          organization: "dockerscoutpolicytest"
+          image: "jfrog.io/foobar/kipz-test"
+          organization: "dockerscoutpolicy"
+          environment: "staging"
+          debug: true
+          
+      - name: Fetch policy results from image w/ exit code true
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "dockerscoutpolicy/customers-api-service:0.0.8"
+          organization: "dockerscoutpolicy"
           exit-code: true # Fail the build if the policies are not met
+          debug: true
+
