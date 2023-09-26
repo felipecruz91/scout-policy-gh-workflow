@@ -30,7 +30,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+          
+      - name: Scout version
+        uses: felipecruz91/scout-action@main
+        with:
+          command: version
+          
       - name: Evaluate already indexed image
         uses: felipecruz91/scout-action@main
         with:
