@@ -30,20 +30,8 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Scout version
-        uses: felipecruz91/scout-action@main
-        with:
-          command: version
-          
+                    
       - name: Evaluate already indexed image
-        uses: felipecruz91/scout-action@main
-        with:
-          command: policy
-          image: "dockerscoutpolicytest/customers-api-service:0.0.12"
-          organization: "dockerscoutpolicytest"
-
-      - name: Evaluate already indexed image with timeout
         uses: felipecruz91/scout-action@main
         with:
           command: policy
