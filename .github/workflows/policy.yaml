@@ -31,7 +31,19 @@ jobs:
           username: ${{ env.REGISTRY_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
-      - name: Docker Pull
+      - name: Pull alpine
+        run: |
+          docker pull alpine@sha256:7298bd41b8aee1adde2a0a2819f695b5057bfd0234bf250f0e5d9946c7ab38bd
+
+      - name: Evaluate local image digest  
+        uses: felipecruz91/scout-action@main
+        with:
+          command: policy
+          image: "alpine@sha256:7298bd41b8aee1adde2a0a2819f695b5057bfd0234bf250f0e5d9946c7ab38bd"
+          organization: "dockerscoutpolicy"
+          debug: true
+          
+      - name: Pull storm
         run: |
           docker pull storm:latest
 
