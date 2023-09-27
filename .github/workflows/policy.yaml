@@ -98,4 +98,5 @@ jobs:
           organization: "dockerscoutpolicy"
           exit-code: true # Fail the build if the policies are not met
           debug: true
+          
 
