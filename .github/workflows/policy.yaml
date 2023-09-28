@@ -34,6 +34,14 @@ jobs:
       - name: Pull alpine
         run: |
           docker pull alpine@sha256:7298bd41b8aee1adde2a0a2819f695b5057bfd0234bf250f0e5d9946c7ab38bd
+          
+      - name: Quickview alpine  
+        uses: felipecruz91/scout-action@main
+        with:
+          command: quickview
+          image: "alpine@sha256:7298bd41b8aee1adde2a0a2819f695b5057bfd0234bf250f0e5d9946c7ab38bd"
+          organization: "dockerscoutpolicy"
+          debug: true
 
       - name: Evaluate local image digest  
         uses: felipecruz91/scout-action@main
