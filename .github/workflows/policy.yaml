@@ -41,7 +41,6 @@ jobs:
           command: quickview
           image: "nginx:latest"
           organization: "dockerscoutpolicy"
-          debug: true
           
       - name: Pull alpine
         run: |
@@ -53,7 +52,6 @@ jobs:
           command: policy
           image: "alpine@sha256:7298bd41b8aee1adde2a0a2819f695b5057bfd0234bf250f0e5d9946c7ab38bd"
           organization: "dockerscoutpolicy"
-          debug: true
           
       - name: Pull storm
         run: |
@@ -65,7 +63,6 @@ jobs:
           command: policy
           image: "storm:latest"
           organization: "dockerscoutpolicy"
-          debug: true    
           
       - name: Fetch policy results from image (exists in registry)
         uses: felipecruz91/scout-action@main
@@ -73,7 +70,6 @@ jobs:
           command: policy
           image: "dockerscoutpolicy/customers-api-service:0.0.8"
           organization: "dockerscoutpolicy"
-          debug: true
 
       - name: Fetch policy results from image w/ platform (exists in registry)
         uses: felipecruz91/scout-action@main
@@ -82,7 +78,6 @@ jobs:
           image: "dockerscoutpolicy/customers-api-service:0.0.8"
           organization: "dockerscoutpolicy"
           platform: "linux/amd64"
-          debug: true
           
       - name: Fetch policy results from image in env 'latest-indexed' (does NOT exist in registry)
         uses: felipecruz91/scout-action@main
@@ -91,7 +86,6 @@ jobs:
           image: "dockerscoutpolicy/customers-api-service"
           organization: "dockerscoutpolicy"
           environment: "latest-indexed"
-          debug: true
           
       - name: Fetch policy results from image with jfrog domain in env 'staging' (does NOT exist in registry)
         uses: felipecruz91/scout-action@main
@@ -100,7 +94,6 @@ jobs:
           image: "jfrog.io/foobar/kipz-test"
           organization: "dockerscoutpolicy"
           environment: "staging"
-          debug: true
           
       - name: Fetch policy results from image w/ exit code true
         uses: felipecruz91/scout-action@main
@@ -109,6 +102,3 @@ jobs:
           image: "dockerscoutpolicy/customers-api-service:0.0.8"
           organization: "dockerscoutpolicy"
           exit-code: true # Fail the build if the policies are not met
-          debug: true
-          
-
