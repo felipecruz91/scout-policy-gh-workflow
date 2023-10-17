@@ -1,2 +1,1 @@
 # scout-policy-gh-workflow
-
